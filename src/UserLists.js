@@ -10,7 +10,7 @@ export default class UserLists extends React.Component{
                 'Content-Type': 'application/json'
             }
         }
-        config.headers['Authorization'] = 'Token f5d07d8742a6dcfecdc57a54e991888451a5dac5';
+        config.headers['Authorization'] = 'Token ac75a7724117da0ec6c5fae3052887c03ae3e2e2';
 
         var url = 'http://127.0.0.1:8000/list/';
         const response = await fetch(url, config);
