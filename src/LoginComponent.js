@@ -1,4 +1,5 @@
 import React from 'react';
+import UserLists from './UserLists';
 
 export default class LoginComponent extends React.Component{
     constructor(props) {
@@ -27,20 +28,28 @@ export default class LoginComponent extends React.Component{
         };
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.token));
+            .then(data => {
+                localStorage.setItem('token', data.token);
+                this.setState({token: data.token});
+            });
         event.preventDefault();
       }
     
       render() {
-        return (
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Name:
-              <input type="text" value={this.state.username} onChange={this.handleChange} />
-              <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        );
+        var token = localStorage.getItem('token');
+
+        if(!token)
+            return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                Name:
+                <input type="text" value={this.state.username} onChange={this.handleChange} />
+                <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+            );
+        else
+            return <UserLists />
       }
 }
